@@ -5,25 +5,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ParameterStorage {
+public class MessageParameters {
     private HashMap<Class, List<Object>> map = new HashMap<>();
     private HashMap<String, Object> namedVariable = new HashMap<>();
 
-    public static ParameterStorage of(Object... o) {
-        ParameterStorage storage = new ParameterStorage();
+    public static MessageParameters of(Object... o) {
+        MessageParameters storage = new MessageParameters();
         for (Object x : o)
             storage.add(x);
         return storage;
     }
 
-    public ParameterStorage add(Object o) {
+    public MessageParameters add(Object o) {
         ClassUtil.iterateParentClass(o.getClass(), cl -> {
             map.computeIfAbsent(cl, a -> new ArrayList<>()).add(o);
         });
         return this;
     }
 
-    public ParameterStorage add(String name, Object o, boolean addWithClass) {
+    public MessageParameters add(String name, Object o, boolean addWithClass) {
         if (addWithClass) {
             add(o);
         }
@@ -31,7 +31,7 @@ public class ParameterStorage {
         return this;
     }
 
-    public ParameterStorage add(String name, Object o) {
+    public MessageParameters add(String name, Object o) {
         return add(name, o, false);
     }
 
@@ -46,5 +46,9 @@ public class ParameterStorage {
 
     public <T> T get(String cx) {
         return (T) namedVariable.get(cx);
+    }
+
+    public List<String> getKeys() {
+        return new ArrayList<>(namedVariable.keySet());
     }
 }

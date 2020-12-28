@@ -1,7 +1,7 @@
 package skywolf46.placeholders.abstraction;
 
 import skywolf46.placeholders.storage.PlaceHolderDataStorage;
-import skywolf46.placeholders.util.ParameterStorage;
+import skywolf46.placeholders.util.MessageParameters;
 
 import java.util.HashMap;
 
@@ -12,7 +12,7 @@ public abstract class AbstractPlaceHolder {
 
     public abstract AbstractPlaceHolder parse(String[] parameters);
 
-    public abstract String asString(ParameterStorage storage);
+    public abstract String asString(MessageParameters storage);
 
     public void register(char start, char end) {
         PlaceHolderDataStorage.getStorage(start, end).registerHolder(this);

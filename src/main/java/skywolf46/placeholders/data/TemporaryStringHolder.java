@@ -1,7 +1,7 @@
 package skywolf46.placeholders.data;
 
 import skywolf46.placeholders.abstraction.AbstractPlaceHolder;
-import skywolf46.placeholders.util.ParameterStorage;
+import skywolf46.placeholders.util.MessageParameters;
 
 public class TemporaryStringHolder extends AbstractPlaceHolder {
     private String target;
@@ -22,7 +22,7 @@ public class TemporaryStringHolder extends AbstractPlaceHolder {
     }
 
     @Override
-    public String asString(ParameterStorage storage) {
+    public String asString(MessageParameters storage) {
         return storage.get(target) == null ? "<" + target + ">" : storage.get(target);
     }
 }

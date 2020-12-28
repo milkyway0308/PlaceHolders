@@ -1,7 +1,7 @@
 package skywolf46.placeholders.data;
 
 import skywolf46.placeholders.abstraction.AbstractPlaceHolder;
-import skywolf46.placeholders.util.ParameterStorage;
+import skywolf46.placeholders.util.MessageParameters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class PlaceHolderWrapper {
         this.holders = hold;
     }
 
-    public String asString(ParameterStorage storage) {
+    public String asString(MessageParameters storage) {
         StringBuilder sb = new StringBuilder();
         for (AbstractPlaceHolder ah : holders)
             sb.append(ah.asString(storage));

@@ -1,27 +1,23 @@
-package skywolf46.placeholders.data;
+package skywolf46.placeholders.impl.holders.minecraft;
 
+import org.bukkit.entity.Player;
 import skywolf46.placeholders.abstraction.AbstractPlaceHolder;
 import skywolf46.placeholders.util.MessageParameters;
 
-public class StringHolder extends AbstractPlaceHolder {
-    private String data;
-
-    public StringHolder(String data) {
-        this.data = data;
-    }
-
+public class PlayerHolder extends AbstractPlaceHolder {
     @Override
     public String getName() {
-        return null;
+        return "player";
     }
 
     @Override
     public AbstractPlaceHolder parse(String[] parameters) {
-        return null;
+        return new PlayerHolder();
     }
 
     @Override
     public String asString(MessageParameters storage) {
-        return this.data;
+        Player px = storage.get(Player.class);
+        return px == null ? "<player>" : px.getName();
     }
 }

@@ -11,12 +11,13 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 public class MessageReplacer {
-    private static HashMap<Class<? extends JavaPlugin>, MessageReplacer> replacers = new HashMap<>();
+    private static HashMap<Class, MessageReplacer> replacers = new HashMap<>();
     private HashMap<String, ReplaceableStringList> sList = new HashMap<>();
     private HashSet<String> alerted = new HashSet<>();
 
 
-    public static MessageReplacer register(Class<? extends JavaPlugin> pl, File fx) {
+
+    public static MessageReplacer register(Class pl, File fx) {
         MessageReplacer mr = of(fx);
         replacers.put(pl, mr);
         return mr;
@@ -43,7 +44,7 @@ public class MessageReplacer {
         return register(pl, new File(pl.getDataFolder(), "message.yml"));
     }
 
-    public static MessageReplacer get(Class<? extends JavaPlugin> pl) {
+    public static MessageReplacer get(Class pl) {
         return replacers.get(pl);
     }
 
@@ -93,14 +94,17 @@ public class MessageReplacer {
 
     public MessageReplacer registerIfNotExists(Enum<?> targetText) {
         try {
+//            System.out.println(sList);
             if (sList.containsKey(targetText.name()))
                 return this;
             Method mtd = targetText.getDeclaringClass().getMethod("get");
             if (mtd.getReturnType().equals(String.class)) {
                 String x = (String) mtd.invoke(targetText);
+//                System.out.println("Registering" + x);
                 register(targetText.name(), x);
             } else if (mtd.getReturnType().isAssignableFrom(List.class)) {
                 List<String> x = (List<String>) mtd.invoke(targetText);
+//                System.out.println("Registering" + x);
                 register(targetText.name(), x.toArray(new String[0]));
             } else {
                 throw new IllegalStateException("Enum class " + targetText.getDeclaringClass().getName() + " not contains method \"public String get()\" or \"public List<String> get\"");
@@ -112,6 +116,7 @@ public class MessageReplacer {
     }
 
     public MessageReplacer registerIfNotExists(Enum[] vals) {
+//        System.out.println("What?");
         for (Enum el : vals) {
             try {
                 registerIfNotExists(el);
@@ -136,6 +141,7 @@ public class MessageReplacer {
     }
 
     public ReplaceableStringList get(String name) {
+//        System.out.println(sList);
         return sList.get(name) == null ? null : sList.get(name).copy();
     }
 

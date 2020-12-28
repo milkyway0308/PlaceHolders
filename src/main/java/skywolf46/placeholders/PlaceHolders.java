@@ -6,7 +6,7 @@ import skywolf46.placeholders.abstraction.AbstractPlaceHolder;
 import skywolf46.placeholders.exception.PlaceHolderUnclosedException;
 import skywolf46.placeholders.parser.PlaceHolderParser;
 import skywolf46.placeholders.storage.PlaceHolderDataStorage;
-import skywolf46.placeholders.util.ParameterStorage;
+import skywolf46.placeholders.util.MessageParameters;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class PlaceHolders {
         PlaceHolderDataStorage.getStorage(start, end).registerHolder(holder);
     }
 
-    public static void processItem(ItemStack item, ParameterStorage storage) throws PlaceHolderUnclosedException {
+    public static void processItem(ItemStack item, MessageParameters storage) throws PlaceHolderUnclosedException {
         if (item == null || !item.hasItemMeta())
             return;
         ItemMeta meta = item.getItemMeta();
@@ -23,7 +23,7 @@ public class PlaceHolders {
         item.setItemMeta(meta);
     }
 
-    private static void processItemMeta(ItemMeta meta, ParameterStorage storage) throws PlaceHolderUnclosedException {
+    private static void processItemMeta(ItemMeta meta, MessageParameters storage) throws PlaceHolderUnclosedException {
         if (meta.hasDisplayName())
             meta.setDisplayName(PlaceHolderParser.parse(meta.getDisplayName()).asString(storage));
         if (meta.hasLore()) {
