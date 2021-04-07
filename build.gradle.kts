@@ -16,30 +16,40 @@ version = properties["version"] as String
 
 repositories {
     mavenCentral()
-    maven("https://maven.pkg.github.com/milkyway0308/CommandAnnotation") {
-        credentials {
-            username = properties["gpr.user"] as String
-            password = properties["gpr.key"] as String
-        }
-    }
+    maven(properties["reposilite.release"] as String)
+    maven(properties["reposilite.spigot"] as String)
 }
 
 
 dependencies {
-    implementation(files("V:/API/Java/Minecraft/Bukkit/Spigot/Spigot 1.12.2.jar"))
-    implementation(files("V:\\Project\\Java\\IntelliJ\\Workspace - Individual\\ReflectedNBTWrapper2\\out\\artifacts\\ReflectedNBTWrapper_v1_2_4"))
-    implementation("skywolf46:commandannotation:+")
-
+    compileOnly("org.spigotmc:spigot:1.12.2")
+    compileOnly("skywolf46:refnbt:latest.release")
+    compileOnly("skywolf46:commandannotation:+")
 }
 
 publishing {
     repositories {
+        maven {
+            name = "Reposilite"
+            url = uri(properties["reposilite.release"] as String)
+            credentials {
+                username = properties["reposilite.user"] as String
+                password = properties["reposilite.token"] as String
+            }
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+        }
+
         maven {
             name = "Github"
             url = uri("https://maven.pkg.github.com/milkyway0308/PlaceHolders")
             credentials {
                 username = properties["gpr.user"] as String
                 password = properties["gpr.key"] as String
+            }
+            authentication {
+                create<BasicAuthentication>("basic")
             }
         }
     }
