@@ -1,7 +1,6 @@
 package skywolf46.placeholders;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import skywolf46.commandannotation.CommandAnnotation;
 import skywolf46.placeholders.impl.holders.java.korean.PostWordPlaceHolder;
 import skywolf46.placeholders.impl.holders.java.time.LocalTimePlaceHolder;
 import skywolf46.placeholders.impl.holders.minecraft.CurrentPlayerHolder;
@@ -19,8 +18,4 @@ public class DummyPlugin extends JavaPlugin {
         PlaceHolders.registerHolder(new MaxPlayerHolder(), '<', '>');
     }
 
-    @Override
-    public void onEnable() {
-        CommandAnnotation.init(this);
-    }
 }

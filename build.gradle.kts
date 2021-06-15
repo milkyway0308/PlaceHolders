@@ -23,8 +23,6 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot:1.12.2")
-    compileOnly("skywolf46:refnbt:latest.release")
-    compileOnly("skywolf46:commandannotation:+")
 }
 
 publishing {
@@ -35,18 +33,6 @@ publishing {
             credentials {
                 username = properties["reposilite.user"] as String
                 password = properties["reposilite.token"] as String
-            }
-            authentication {
-                create<BasicAuthentication>("basic")
-            }
-        }
-
-        maven {
-            name = "Github"
-            url = uri("https://maven.pkg.github.com/milkyway0308/PlaceHolders")
-            credentials {
-                username = properties["gpr.user"] as String
-                password = properties["gpr.key"] as String
             }
             authentication {
                 create<BasicAuthentication>("basic")
