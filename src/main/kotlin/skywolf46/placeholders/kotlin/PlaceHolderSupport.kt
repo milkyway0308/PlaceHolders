@@ -12,9 +12,10 @@ fun <T> T.storage() = MessageReplacer.get(this!!::class.java)
 
 fun <T> T.registerStorage(fx: File) = MessageReplacer.register(this!!::class.java, fx)
 
-inline fun <reified T : Enum<Any>> T.toMessage() = MessageReplacer.get(T::class.java)[this]
+inline fun <reified T : Enum<*>> T.toMessage() = MessageReplacer.get(T::class.java)[this]
 
 fun KClass<*>.registerIfEnum(plugin: JavaPlugin) {
+
     java.registerIfEnum(plugin)
 }
 

@@ -6,6 +6,7 @@ import skywolf46.placeholders.abstraction.AbstractPlaceHolder;
 import skywolf46.placeholders.data.PlaceHolderWrapper;
 import skywolf46.placeholders.data.StringHolder;
 import skywolf46.placeholders.data.TemporaryStringHolder;
+import skywolf46.placeholders.data.UnidentifiedHolder;
 import skywolf46.placeholders.exception.PlaceHolderUnclosedException;
 import skywolf46.placeholders.storage.PlaceHolderDataStorage;
 import skywolf46.placeholders.storage.PlaceHolderStorage;
@@ -107,7 +108,7 @@ public class PlaceHolderParser {
                 parse = parse.substring(1, parse.length() - 1);
                 String[] substring = parse.split(";");
                 AbstractPlaceHolder holder = splitAndProcess(holderStorage, parse, substring);
-                holders.add(holder == null ? holder = new StringHolder(parse) : holder);
+                holders.add(holder == null ? holder = new UnidentifiedHolder(parse) : holder);
                 lastParse = current + 1;
                 i = current;
             }
