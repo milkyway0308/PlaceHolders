@@ -4,14 +4,16 @@ import skywolf46.extrautility.data.ArgumentStorage
 import skywolf46.placeholderskotlin.abstraction.IAnalyzeBroker
 import skywolf46.placeholderskotlin.abstraction.IAnalyzer
 import skywolf46.placeholderskotlin.data.WrappedString
+import skywolf46.placeholderskotlin.storage.PlaceHolderManager
 
-object StringAnalyzer : IAnalyzer<String, WrappedString, StringAnalyzer> {
+class StringAnalyzer(val manager: PlaceHolderManager) : IAnalyzer<String, WrappedString, StringAnalyzer> {
     override fun analyze(
         brokers: Array<IAnalyzeBroker<String, WrappedString, StringAnalyzer>>,
         data: ArgumentStorage,
         target: String,
     ): WrappedString {
         TODO("Not yet implemented")
+
     }
 
     override fun addBroker(broker: IAnalyzeBroker<String, WrappedString, StringAnalyzer>): StringAnalyzer {

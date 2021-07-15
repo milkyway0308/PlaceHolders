@@ -3,7 +3,7 @@ package skywolf46.placeholderskotlin.abstraction
 
 import skywolf46.extrautility.data.ArgumentStorage
 import skywolf46.placeholderskotlin.data.ArgumentData
-import skywolf46.placeholderskotlin.storage.PlaceHolderStorage
+import skywolf46.placeholderskotlin.storage.PlaceHolderManager
 
 /**
  * Base class of placeholders.
@@ -19,7 +19,7 @@ abstract class AbstractPlaceHolder(val data: ArgumentData) {
      * Called when current holder registered to storage.
      * Registration will fail when exception throw from this method.
      */
-    open fun onRegister(storage: PlaceHolderStorage) {
+    open fun onRegister(manager: PlaceHolderManager) {
         // Empty method for implementation
     }
 

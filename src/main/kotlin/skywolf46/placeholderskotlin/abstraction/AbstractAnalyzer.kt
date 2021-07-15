@@ -3,16 +3,16 @@ package skywolf46.placeholderskotlin.abstraction
 import skywolf46.extrautility.data.ArgumentStorage
 import skywolf46.placeholderskotlin.enums.AnalyzeProgress
 
-abstract class AbstractAnalyzer<TARGET : Any, RESULT : Any, SELF : IAnalyzer<TARGET, RESULT, SELF>> :
-    IAnalyzer<TARGET, RESULT, SELF> {
-    protected val brokers = mutableListOf<IAnalyzeBroker<TARGET, RESULT, SELF>>()
+abstract class AbstractAnalyzer<INPUT : Any, RESULT : Any, SELF : IAnalyzer<INPUT, RESULT, SELF>> :
+    IAnalyzer<INPUT, RESULT, SELF> {
+    protected val brokers = mutableListOf<IAnalyzeBroker<INPUT, RESULT, SELF>>()
 
-    abstract fun analyze(broker: WrappedBrokers, data: ArgumentStorage, target: TARGET): RESULT
+    abstract fun analyze(broker: WrappedBrokers, data: ArgumentStorage, target: INPUT): RESULT
 
     override fun analyze(
-        brokers: Array<IAnalyzeBroker<TARGET, RESULT, SELF>>,
+        brokers: Array<IAnalyzeBroker<INPUT, RESULT, SELF>>,
         data: ArgumentStorage,
-        target: TARGET,
+        target: INPUT,
     ): RESULT {
         val wrappedBrokers = WrappedBrokers(brokers)
         wrappedBrokers.intercept(AnalyzeProgress.READY, data, target)
@@ -22,13 +22,13 @@ abstract class AbstractAnalyzer<TARGET : Any, RESULT : Any, SELF : IAnalyzer<TAR
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun addBroker(broker: IAnalyzeBroker<TARGET, RESULT, SELF>): SELF {
+    override fun addBroker(broker: IAnalyzeBroker<INPUT, RESULT, SELF>): SELF {
         brokers += broker
         return this as SELF
     }
 
-    inner class WrappedBrokers(temporaryBrokers: Array<IAnalyzeBroker<TARGET, RESULT, SELF>>) {
-        val wrappedBrokers = mutableListOf<IAnalyzeBroker<TARGET, RESULT, SELF>>()
+    inner class WrappedBrokers(temporaryBrokers: Array<IAnalyzeBroker<INPUT, RESULT, SELF>>) {
+        val wrappedBrokers = mutableListOf<IAnalyzeBroker<INPUT, RESULT, SELF>>()
 
         init {
             this.wrappedBrokers.addAll(brokers)
@@ -36,7 +36,7 @@ abstract class AbstractAnalyzer<TARGET : Any, RESULT : Any, SELF : IAnalyzer<TAR
 
         }
 
-        fun intercept(progress: AnalyzeProgress, storage: ArgumentStorage, input: TARGET) {
+        fun intercept(progress: AnalyzeProgress, storage: ArgumentStorage, input: INPUT) {
             for (x in wrappedBrokers) {
                 x.intercept(progress, storage, input)
             }

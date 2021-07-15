@@ -11,5 +11,4 @@ open class WrappedString(val holders: List<AbstractPlaceHolder>) {
         }
         return builder.toString()
     }
-
 }
