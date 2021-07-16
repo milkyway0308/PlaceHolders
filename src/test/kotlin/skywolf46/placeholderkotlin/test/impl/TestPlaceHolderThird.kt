@@ -4,8 +4,8 @@ import skywolf46.extrautility.data.ArgumentStorage
 import skywolf46.placeholderskotlin.abstraction.AbstractPlaceHolder
 import skywolf46.placeholderskotlin.data.ArgumentData
 
-class TestPlaceHolder : AbstractPlaceHolder(){
+class TestPlaceHolderThird : AbstractPlaceHolder(){
     override fun process(data: ArgumentData, inputParam: ArgumentStorage): String? {
-        return "Test"
+        return "Test3"
     }
 }

@@ -14,7 +14,12 @@ class PureStringHolder(val str: String) : AbstractPlaceHolder() {
     init {
         println("Pure string detected: $str")
     }
+
     override fun process(data: ArgumentData, inputParam: ArgumentStorage): String? {
         return str
+    }
+
+    override fun toString(): String {
+        return "PureString(text=$str)"
     }
 }

@@ -56,7 +56,7 @@ class StringAnalyzer(val manager: PlaceHolderManager) :
             list.add(this to (this.toPlaceHolder(manager) ?: PureStringHolder(original)))
             broker.probeStep(AnalyzeProgress.ANALYZED, data, list[list.size - 1].second)
         }
-        return parsed.first + 1
+        return parsed.first
     }
 
     private fun checkState(index: Int, target: String, storage: ArgumentStorage): Pair<Int, ArgumentData?> {
