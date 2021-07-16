@@ -18,6 +18,13 @@ dependencies {
     wolfyUtil("1.51.1")
     wolfy("skywolf46:commandannotation-core:3.0.4")
     wolfy("skywolf46:commandannotation-minecraft:3.0.4")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.1")
+    testImplementation("org.junit.platform:junit-platform-runner:1.7.1")
+}
+
+test {
+    useJUnitPlatform()
 }
 
 publishing {

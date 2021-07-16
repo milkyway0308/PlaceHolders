@@ -1,5 +1,6 @@
 package skywolf46.placeholderskotlin.impl.placeholders
 
+import skywolf46.extrautility.data.ArgumentStorage
 import skywolf46.placeholderskotlin.abstraction.AbstractPlaceHolder
 import skywolf46.placeholderskotlin.data.ArgumentData
 
@@ -9,9 +10,11 @@ import skywolf46.placeholderskotlin.data.ArgumentData
  *
  * Cannot registered to placeholder storage.
  */
-class PureStringHolder(data: ArgumentData) : AbstractPlaceHolder(data) {
-    override fun process(inputParam: ArgumentData): String? {
-        return data.content
+class PureStringHolder(val str: String) : AbstractPlaceHolder() {
+    init {
+        println("Pure string detected: $str")
     }
-
+    override fun process(data: ArgumentData, inputParam: ArgumentStorage): String? {
+        return str
+    }
 }

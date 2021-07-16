@@ -2,7 +2,7 @@ package skywolf46.placeholderskotlin.storage
 
 open class CharacterInspector<X : Any> {
 
-    private val deepInspected = mutableMapOf<Char, CharacterInspector<X>>()
+    protected val deepInspected = mutableMapOf<Char, CharacterInspector<X>>()
     var value: X? = null
 
     fun isAcceptable(key: String): Boolean {
@@ -23,6 +23,31 @@ open class CharacterInspector<X : Any> {
         if (pointer == key.length)
             return value
         return deepInspected[key[pointer]]?.getValueRecursively(pointer + 1, key)
+    }
+
+
+    fun getAcceptableValue(key: String): Pair<Boolean, X?> {
+        return getAcceptableValueRecursively(0, key)
+    }
+
+    private fun getAcceptableValueRecursively(pointer: Int, key: String): Pair<Boolean, X?> {
+        if (pointer == key.length)
+            return true to value
+        return deepInspected[key[pointer]]?.getAcceptableValueRecursively(pointer + 1, key) ?: false to null
+    }
+
+    fun registerIfNotExists(key: String) {
+        registerIfNotExistsRecursively(0, key)
+    }
+
+
+    private fun registerIfNotExistsRecursively(pointer: Int, key: String) {
+        if (pointer >= key.length) {
+            return
+        }
+        deepInspected.computeIfAbsent(key[pointer]) {
+            CharacterInspector()
+        }.registerIfNotExistsRecursively(pointer + 1, key)
     }
 
     fun registerValue(key: String, data: X) {

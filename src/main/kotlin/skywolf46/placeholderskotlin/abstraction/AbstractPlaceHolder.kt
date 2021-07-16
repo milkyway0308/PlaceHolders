@@ -12,8 +12,7 @@ import skywolf46.placeholderskotlin.storage.PlaceHolderManager
  *  Warning : If SkywolfExtraUtility run with restricted mode in your server,
  *  You have to add [skywolf46.extrautility.annotations.AllowScanning] annotation to your plugin core (JavaPlugin implementation).
  */
-abstract class AbstractPlaceHolder(val data: ArgumentData) {
-    val parameter = data.parameters
+abstract class AbstractPlaceHolder {
 
     /**
      * Called when current holder registered to storage.
@@ -36,5 +35,5 @@ abstract class AbstractPlaceHolder(val data: ArgumentData) {
      * This method must have to return placeholder processing result.
      * If return value is null, placeholder will be replaced with pure string.
      */
-    abstract fun process(inputParam: ArgumentStorage): String?
+    abstract fun process(data: ArgumentData, inputParam: ArgumentStorage): String?
 }
