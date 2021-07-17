@@ -4,6 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.jupiter.api.Test
 import skywolf46.extrautility.data.ArgumentStorage
 import skywolf46.placeholderkotlin.test.data.TestTarget
+import skywolf46.placeholderkotlin.test.impl.TestParameterHolder
 import skywolf46.placeholderkotlin.test.impl.TestPlaceHolderFirst
 import skywolf46.placeholderkotlin.test.impl.TestPlaceHolderSecond
 import skywolf46.placeholderkotlin.test.impl.TestPlaceHolderThird
@@ -91,5 +92,13 @@ class StringParseTest {
                 targetString)
                 .parse(ArgumentStorage())
         )
+    }
+
+    @Test
+    fun parameterizedPlaceHolderTest() {
+        val next = 50
+        val (targetString, storage, parser) = TestTarget("$next is <oct:$next>.")
+        parser.manager.registerPlaceholder("<", ">", "oct", TestParameterHolder::class.java)
+        println(parser.analyze(arrayOf(), storage, targetString).parse(storage))
     }
 }

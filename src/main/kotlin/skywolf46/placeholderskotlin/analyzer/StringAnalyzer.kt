@@ -17,7 +17,7 @@ import skywolf46.placeholderskotlin.util.clearAndGet
 class StringAnalyzer(val manager: PlaceHolderManager) :
     AbstractAnalyzer<String, AbstractPlaceHolder, WrappedString, StringAnalyzer>() {
     companion object {
-        private val EMPTY_DATA = ArgumentData("", "", "", "", ArgumentStorage())
+        private val EMPTY_DATA = ArgumentData("", "", "", "", mutableListOf())
     }
 
     override fun analyze(broker: WrappedBrokers, data: ArgumentStorage, target: String): WrappedString {

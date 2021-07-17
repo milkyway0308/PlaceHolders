@@ -5,6 +5,7 @@ import skywolf46.placeholderskotlin.abstraction.IAnalyzeBroker
 import skywolf46.placeholderskotlin.abstraction.IAnalyzer
 import skywolf46.placeholderskotlin.data.ArgumentData
 import skywolf46.placeholderskotlin.data.PlaceHolderPrepare
+import skywolf46.placeholderskotlin.util.splitWithoutQuoted
 
 object PlaceHolderAnalyzer : IAnalyzer<PlaceHolderPrepare, Nothing, ArgumentData, PlaceHolderAnalyzer> {
     override fun analyze(
@@ -12,13 +13,12 @@ object PlaceHolderAnalyzer : IAnalyzer<PlaceHolderPrepare, Nothing, ArgumentData
         data: ArgumentStorage,
         target: PlaceHolderPrepare,
     ): ArgumentData {
-        // TODO separate parameter
-        val parameter = ArgumentStorage()
+        val quoted = target.content.splitWithoutQuoted()
         return ArgumentData("${target.prefix}${target.content}${target.suffix}",
             target.prefix,
             target.suffix,
-            target.content,
-            parameter)
+            quoted[0],
+            quoted.subList(1, quoted.size))
     }
 
     override fun addBroker(broker: IAnalyzeBroker<PlaceHolderPrepare, Nothing, ArgumentData, PlaceHolderAnalyzer>): PlaceHolderAnalyzer {

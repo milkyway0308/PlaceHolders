@@ -9,7 +9,7 @@ data class ArgumentData(
     val prefix: String,
     val suffix: String,
     val content: String,
-    val parameters: ArgumentStorage,
+    val parameters: List<String>,
 ) {
     fun toPlaceHolder(manager: PlaceHolderManager): AbstractPlaceHolder? {
         return manager.findHolderStorage(prefix, suffix)?.get(content)?.newInstance()?.apply {
