@@ -7,9 +7,6 @@ import skywolf46.placeholderkotlin.test.data.TestTarget
 import skywolf46.placeholderkotlin.test.impl.TestPlaceHolderFirst
 import skywolf46.placeholderkotlin.test.impl.TestPlaceHolderSecond
 import skywolf46.placeholderkotlin.test.impl.TestPlaceHolderThird
-import skywolf46.placeholderskotlin.PlaceHoldersKotlin
-import skywolf46.placeholderskotlin.analyzer.StringAnalyzer
-import skywolf46.placeholderskotlin.storage.PlaceHolderManager
 
 class StringParseTest {
 

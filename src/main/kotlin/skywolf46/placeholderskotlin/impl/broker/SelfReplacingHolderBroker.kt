@@ -1,15 +1,14 @@
-package skywolf46.placeholderkotlin.test.impl.interceptor
+package skywolf46.placeholderskotlin.impl.broker
 
 import skywolf46.extrautility.data.ArgumentStorage
-import skywolf46.placeholderskotlin.abstraction.AbstractAnalyzeBroker
 import skywolf46.placeholderskotlin.abstraction.AbstractPlaceHolder
 import skywolf46.placeholderskotlin.abstraction.AbstractPlaceHolderBroker
-import skywolf46.placeholderskotlin.data.WrappedString
 import skywolf46.placeholderskotlin.enums.AnalyzeProgress
 import skywolf46.placeholderskotlin.impl.placeholders.EmptyPlaceHolder
 import skywolf46.placeholderskotlin.impl.placeholders.PureStringHolder
+import skywolf46.placeholderskotlin.impl.placeholders.SelfReplacingPlaceHolder
 
-object PureStringHolderReplacer : AbstractPlaceHolderBroker() {
+object SelfReplacingHolderBroker : AbstractPlaceHolderBroker() {
     override fun intercept(
         step: AnalyzeProgress,
         storage: ArgumentStorage,
@@ -18,7 +17,7 @@ object PureStringHolderReplacer : AbstractPlaceHolderBroker() {
     ): AbstractPlaceHolder? {
         if (derived is EmptyPlaceHolder) {
             storage.get<Any>(derived.data.content)?.toString()?.apply {
-                return PureStringHolder(this)
+                return SelfReplacingPlaceHolder()
             }
         }
         return null

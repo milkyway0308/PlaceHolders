@@ -1,11 +1,9 @@
 package skywolf46.placeholderkotlin.test
 
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.jupiter.api.Test
-import skywolf46.extrautility.data.ArgumentStorage
 import skywolf46.placeholderkotlin.test.data.TestTarget
-import skywolf46.placeholderkotlin.test.impl.interceptor.PureStringHolderReplacer
+import skywolf46.placeholderskotlin.impl.broker.SelfReplacingHolderBroker
 import skywolf46.placeholderkotlin.test.impl.interceptor.TempPlaceholderReplacer
 
 class BrokerParseTest {
@@ -21,7 +19,7 @@ class BrokerParseTest {
     @Test
     fun replaceTemporaryHolderWithInterceptor() {
         val (targetString, storage, parser) = TestTarget("Hello, <world>. <Coded> to work and not to feel>")
-        parser.addBroker(PureStringHolderReplacer)
+        parser.addBroker(SelfReplacingHolderBroker)
         storage["Coded"] = "Programmed"
         parser.manager.registerPrefixSuffix("<", ">")
         assertEquals(

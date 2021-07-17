@@ -1,14 +1,14 @@
 package skywolf46.placeholderskotlin.storage
 
 import skywolf46.extrautility.data.ArgumentStorage
-import skywolf46.placeholderskotlin.PlaceHoldersKotlin
+import skywolf46.placeholderskotlin.PlaceHolders.DEFAULT_STORAGE
 import skywolf46.placeholderskotlin.abstraction.AbstractPlaceHolder
 
 class PlaceHolderManager : ArgumentStorage() {
     companion object {
         fun createProxiedStorage(): PlaceHolderManager {
             return PlaceHolderManager().apply {
-                addProxy(PlaceHoldersKotlin.DEFAULT_STORAGE)
+                addProxy(DEFAULT_STORAGE)
             }
         }
     }
