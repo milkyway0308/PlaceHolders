@@ -32,7 +32,6 @@ class StringAnalyzer(val manager: PlaceHolderManager) :
                     }
                     index = analyzeState(broker, data, list, this@with)
                 } ?: kotlin.run {
-                    println("Failing to parse, appending ${target[index]}")
                     emptyHolder.append(target[index++])
                 }
             }
@@ -54,7 +53,6 @@ class StringAnalyzer(val manager: PlaceHolderManager) :
                 ?: this.toPlaceHolder(manager)
                 ?: EmptyPlaceHolder(this))
                 .run {
-                    println("Broker result: ${broker.intercept(AnalyzeProgress.ANALYZED, data, content, this)}")
                     broker.intercept(AnalyzeProgress.ANALYZED, data, content, this) ?: this
                 }
             list.add(this to result)
@@ -66,14 +64,7 @@ class StringAnalyzer(val manager: PlaceHolderManager) :
     private fun checkState(index: Int, target: String, storage: ArgumentStorage): Pair<Int, ArgumentData?> {
         val inspector = manager.getPrefixInspector()
         inspector.checkMaximumAcceptableValue(index, target)?.let { data ->
-            println("Matched ${data.second} (Current ${target.substring(0, data.first)})")
             inspector.getValue(data.second)?.findMatchingSuffix(data.first, target)?.apply {
-                println("Index: ${index}, Result: ${this}")
-                println("Pure: ${target.substring(index, first)}")
-                println("Total: ${target.substring(0, first)}")
-                println("Prestart ${data.first} -> PreEnd ${first}")
-                println("Start ${data.first + data.second.length} -> End ${first - second.length}")
-                println("Current: ${target.substring(data.first, first - second.length)}")
                 return first to PlaceHolderAnalyzer.analyze(arrayOf(),
                     storage,
                     PlaceHolderPrepare(data.second,
@@ -81,14 +72,11 @@ class StringAnalyzer(val manager: PlaceHolderManager) :
                         target.substring(data.first, first - second.length)))
             }
         }
-        println("Failing.")
         return index to null
     }
 
 
     private fun PlaceHolderSuffixInspector.findMatchingSuffix(index: Int, content: String): Pair<Int, String>? {
-        test()
-        println("Finding")
         for (x in index until content.length) {
             checkMaximumAcceptableValue(x, content)?.apply {
                 return this
@@ -106,7 +94,6 @@ class StringAnalyzer(val manager: PlaceHolderManager) :
             if (isAcceptable(content.substring(startIndex, x))) {
                 if (x == startIndex)
                     return null
-                println("Accepted on ${startIndex}, Start index ${x}")
                 return x to content.substring(startIndex, x)
             }
         }

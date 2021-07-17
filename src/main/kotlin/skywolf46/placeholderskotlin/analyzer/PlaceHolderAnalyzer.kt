@@ -13,7 +13,12 @@ object PlaceHolderAnalyzer : IAnalyzer<PlaceHolderPrepare, Nothing, ArgumentData
         target: PlaceHolderPrepare,
     ): ArgumentData {
         // TODO separate parameter
-        return ArgumentData("${target.prefix}${target.content}${target.suffix}", target.prefix, target.suffix, target.content, ArgumentStorage())
+        val parameter = ArgumentStorage()
+        return ArgumentData("${target.prefix}${target.content}${target.suffix}",
+            target.prefix,
+            target.suffix,
+            target.content,
+            parameter)
     }
 
     override fun addBroker(broker: IAnalyzeBroker<PlaceHolderPrepare, Nothing, ArgumentData, PlaceHolderAnalyzer>): PlaceHolderAnalyzer {

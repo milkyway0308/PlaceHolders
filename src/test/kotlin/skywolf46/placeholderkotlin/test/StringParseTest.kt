@@ -89,9 +89,7 @@ class StringParseTest {
             parser.analyze(arrayOf(),
                 ArgumentStorage(),
                 targetString)
-                .parse(ArgumentStorage()).apply {
-                    println("Final: $this")
-                }
+                .parse(ArgumentStorage())
         )
     }
 }
