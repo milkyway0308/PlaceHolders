@@ -36,10 +36,23 @@ abstract class AbstractAnalyzer<INPUT : Any, STEP : Any, RESULT : Any, SELF : IA
 
         }
 
-        fun intercept(progress: AnalyzeProgress, storage: ArgumentStorage, input: INPUT) {
+        fun intercept(progress: AnalyzeProgress, storage: ArgumentStorage, input: INPUT): STEP? {
             for (x in wrappedBrokers) {
-                x.intercept(progress, storage, input)
+                x.intercept(progress, storage, input)?.apply {
+                    return this
+                }
             }
+            return null
+        }
+
+
+        fun intercept(progress: AnalyzeProgress, storage: ArgumentStorage, input: INPUT, derive: STEP): STEP? {
+            for (x in wrappedBrokers) {
+                x.intercept(progress, storage, input, derive)?.apply {
+                    return this
+                }
+            }
+            return null
         }
 
 

@@ -1,20 +1,18 @@
 package skywolf46.placeholderskotlin.analyzer
 
-import skywolf46.commandannotation.kotlin.data.Arguments
 import skywolf46.extrautility.data.ArgumentStorage
-import skywolf46.extrautility.util.test
 import skywolf46.placeholderskotlin.abstraction.AbstractAnalyzer
 import skywolf46.placeholderskotlin.abstraction.AbstractPlaceHolder
 import skywolf46.placeholderskotlin.data.ArgumentData
 import skywolf46.placeholderskotlin.data.PlaceHolderPrepare
 import skywolf46.placeholderskotlin.data.WrappedString
 import skywolf46.placeholderskotlin.enums.AnalyzeProgress
+import skywolf46.placeholderskotlin.impl.placeholders.EmptyPlaceHolder
 import skywolf46.placeholderskotlin.impl.placeholders.PureStringHolder
 import skywolf46.placeholderskotlin.storage.CharacterInspector
 import skywolf46.placeholderskotlin.storage.PlaceHolderManager
 import skywolf46.placeholderskotlin.storage.PlaceHolderSuffixInspector
 import skywolf46.placeholderskotlin.util.clearAndGet
-import java.util.*
 
 class StringAnalyzer(val manager: PlaceHolderManager) :
     AbstractAnalyzer<String, AbstractPlaceHolder, WrappedString, StringAnalyzer>() {
@@ -52,8 +50,14 @@ class StringAnalyzer(val manager: PlaceHolderManager) :
         parsed: Pair<Int, ArgumentData?>,
     ): Int {
         parsed.second?.apply {
-            broker.intercept(AnalyzeProgress.ANALYZING, data, content)
-            list.add(this to (this.toPlaceHolder(manager) ?: PureStringHolder(original)))
+            val result = (broker.intercept(AnalyzeProgress.ANALYZING, data, content)
+                ?: this.toPlaceHolder(manager)
+                ?: EmptyPlaceHolder(this))
+                .run {
+                    println("Broker result: ${broker.intercept(AnalyzeProgress.ANALYZED, data, content, this)}")
+                    broker.intercept(AnalyzeProgress.ANALYZED, data, content, this) ?: this
+                }
+            list.add(this to result)
             broker.probeStep(AnalyzeProgress.ANALYZED, data, list[list.size - 1].second)
         }
         return parsed.first

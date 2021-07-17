@@ -17,7 +17,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
     spigotApi("1.12.2")
-    wolfyUtil("1.51.1")
+    wolfyUtil("1.51.3")
     wolfy("skywolf46:commandannotation-core:3.0.4")
     wolfy("skywolf46:commandannotation-minecraft:3.0.4")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.1")

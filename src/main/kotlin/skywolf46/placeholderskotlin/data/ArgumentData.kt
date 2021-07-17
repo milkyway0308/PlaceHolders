@@ -1,6 +1,5 @@
 package skywolf46.placeholderskotlin.data
 
-import skywolf46.commandannotation.kotlin.data.Arguments
 import skywolf46.extrautility.data.ArgumentStorage
 import skywolf46.placeholderskotlin.abstraction.AbstractPlaceHolder
 import skywolf46.placeholderskotlin.storage.PlaceHolderManager
