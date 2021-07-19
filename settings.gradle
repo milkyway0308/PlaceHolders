@@ -1,10 +1,13 @@
+
 pluginManagement {
     repositories {
         maven {
             url = uri("http://dja.kr:55201/releases")
         }
         gradlePluginPortal()
+        mavenCentral()
     }
 }
 rootProject.name = 'PlaceHolders'
+include('core')
 
