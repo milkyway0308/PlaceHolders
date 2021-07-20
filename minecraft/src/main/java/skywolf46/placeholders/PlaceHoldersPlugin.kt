@@ -5,7 +5,7 @@ import skywolf46.extrautility.annotations.AllowScanning
 import skywolf46.extrautility.util.MinecraftLoader
 import skywolf46.messagereplacer.MessageReplacer
 import skywolf46.messagereplacer.util.MessageReplacerUtility.i18n
-import skywolf46.placeholders.test.TestMessageConfig
+
 import skywolf46.placeholderskotlin.PlaceHolders
 
 @AllowScanning
