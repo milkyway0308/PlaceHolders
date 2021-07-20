@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'skywolf46.wolfradle' version "1.1.3"
+    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
+    id("com.github.johnrengelman.shadow") version "2.0.4"
+}
+
+version properties["version"]
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    finalizedBy("shadowJar")
+}
+
+dependencies {
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compileOnly "org.spigotmc:spigot:1.12.2"
+    compileOnly "skywolf46:exutil:1.51.3"
+    implementation(project(":core"))
+    implementation(project(":messageReplacer"))
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+publishing {
+    repositories {
+        maven {
+            name = "Reposilite"
+            url(rootProject.properties["snapshot"] as Boolean ? rootProject.properties['reposilite.snapshot'] as String : rootProject.properties['reposilite.release'] as String)
+            credentials {
+                username rootProject.properties['reposilite.user'] as String
+                password rootProject.properties['reposilite.token'] as String
+            }
+        }
+    }
+    publications {
+        create("jar", MavenPublication) {
+            groupId 'skywolf46'
+            artifactId "placeholders-mc"
+            version rootProject.properties['version'] as String
+            from components.java
+        }
+    }
+}
