@@ -7,7 +7,7 @@ import skywolf46.placeholderskotlin.storage.PlaceHolderManager
 
 /**
  * Base class of placeholders.
- * If @PlaceHolder annotation is attached to [AbstractPlaceHolder] class, PlaceHolders library will register placeholder automatically.
+ * If @PlaceHolder annotation is attached to [] class, PlaceHolders library will register placeholder automatically.
  *
  *  Warning : If SkywolfExtraUtility run with restricted mode in your server,
  *  You have to add [skywolf46.extrautility.annotations.AllowScanning] annotation to your plugin core (JavaPlugin implementation).
@@ -36,4 +36,8 @@ abstract class AbstractPlaceHolder {
      * If return value is null, placeholder will be replaced with pure string.
      */
     abstract fun process(data: ArgumentData, inputParam: ArgumentStorage): String?
+
+    override fun toString(): String {
+        return "${javaClass.name}()"
+    }
 }

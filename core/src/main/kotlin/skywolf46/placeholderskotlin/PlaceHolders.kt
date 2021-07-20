@@ -1,7 +1,9 @@
 package skywolf46.placeholderskotlin
 
 import skywolf46.extrautility.data.ArgumentStorage
+import skywolf46.placeholderskotlin.abstraction.AbstractPlaceHolder
 import skywolf46.placeholderskotlin.analyzer.StringAnalyzer
+import skywolf46.placeholderskotlin.annotations.PlaceHolder
 import skywolf46.placeholderskotlin.data.WrappedString
 import skywolf46.placeholderskotlin.impl.broker.SelfReplacingHolderBroker
 import skywolf46.placeholderskotlin.storage.PlaceHolderManager
@@ -20,5 +22,16 @@ object PlaceHolders {
 
     fun String.compileWith(analyzer: StringAnalyzer, storage: ArgumentStorage): WrappedString {
         return analyzer.analyze(arrayOf(), storage, this)
+    }
+
+    fun init(cls: List<Class<*>>) {
+        for (x in cls) {
+            x.getAnnotation(PlaceHolder::class.java)?.apply {
+                if (!AbstractPlaceHolder::class.java.isAssignableFrom(x))
+                    return@apply
+                DEFAULT_STORAGE.registerPlaceholder(this.prefix, this.suffix, this.content,
+                    x as Class<out AbstractPlaceHolder>)
+            }
+        }
     }
 }

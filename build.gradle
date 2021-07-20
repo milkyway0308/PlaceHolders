@@ -1,0 +1,5 @@
+subprojects {
+    wrapper {
+        distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+    }
+}

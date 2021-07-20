@@ -39,7 +39,7 @@ class StringAnalyzer(val manager: PlaceHolderManager) :
         if (emptyHolder.isNotEmpty()) {
             list += EMPTY_DATA to PureStringHolder(emptyHolder.clearAndGet())
         }
-        return WrappedString(list)
+        return WrappedString(target, list)
     }
 
     private fun analyzeState(

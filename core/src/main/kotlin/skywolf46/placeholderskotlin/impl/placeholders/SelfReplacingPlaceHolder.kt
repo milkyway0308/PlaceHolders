@@ -8,4 +8,8 @@ class SelfReplacingPlaceHolder : AbstractPlaceHolder() {
     override fun process(data: ArgumentData, inputParam: ArgumentStorage): String? {
         return inputParam[data.content] ?: data.original
     }
+
+    override fun toString(): String {
+        return "SelfReplacingHolder()"
+    }
 }

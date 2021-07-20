@@ -49,6 +49,7 @@ class PlaceHolderManager : ArgumentStorage() {
         name: String,
         holder: Class<out AbstractPlaceHolder>,
     ): PlaceHolderManager {
+        println("Registered holder $name")
         getPrefixInspector().getOrRegisterStorage(prefix, suffix)[name] = holder
         return this
     }

@@ -1,6 +1,0 @@
-name: PlaceHolders
-version: ${version}
-main: skywolf46.placeholders.DummyPlugin
-softdepend:
-  - CommandAnnotation
-  - SkywolfExtraUtility

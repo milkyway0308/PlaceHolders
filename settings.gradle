@@ -10,4 +10,6 @@ pluginManagement {
 }
 rootProject.name = 'PlaceHolders'
 include('core')
+include 'messageReplacer'
+include 'minecraft'
 
