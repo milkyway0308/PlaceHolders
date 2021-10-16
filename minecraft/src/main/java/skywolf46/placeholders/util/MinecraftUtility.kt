@@ -1,7 +1,7 @@
 package skywolf46.placeholders.util
 
+import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
 import skywolf46.extrautility.data.ArgumentStorage
 import skywolf46.placeholderskotlin.data.WrappedMessage
 
@@ -13,7 +13,7 @@ object MinecraftUtility {
                 addArgument(x)
         }
         parseWith(storage).forEach {
-            sender.sendMessage(it)
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', it))
         }
     }
 
@@ -25,7 +25,16 @@ object MinecraftUtility {
                 set(x.first, x.second)
         }
         parseWith(storage).forEach {
-            sender.sendMessage(it)
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', it))
+        }
+    }
+
+    fun WrappedMessage.send(sender: CommandSender) {
+        val storage = ArgumentStorage().apply {
+            addArgument(sender)
+        }
+        parseWith(storage).forEach {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', it))
         }
     }
 }

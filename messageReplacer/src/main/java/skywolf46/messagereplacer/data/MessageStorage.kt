@@ -113,4 +113,9 @@ class MessageStorage(private val instance: Any, private val file: File) {
         }
     }
 
+    fun map(): Map<String, List<String>> {
+        return messages.map { (x, y) -> x to y.get("en_US") }
+            .associate { (x, y) -> x to y.map { z -> z.rawString } }
+    }
+
 }

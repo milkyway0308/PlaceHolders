@@ -65,7 +65,7 @@ class StringAnalyzer(val manager: PlaceHolderManager) :
         val inspector = manager.getPrefixInspector()
         inspector.checkMaximumAcceptableValue(index, target)?.let { data ->
             inspector.getValue(data.second)?.findMatchingSuffix(data.first, target)?.apply {
-                return first to PlaceHolderAnalyzer.analyze(arrayOf(),
+               return first to PlaceHolderAnalyzer.analyze(arrayOf(),
                     storage,
                     PlaceHolderPrepare(data.second,
                         second,
@@ -79,7 +79,7 @@ class StringAnalyzer(val manager: PlaceHolderManager) :
     private fun PlaceHolderSuffixInspector.findMatchingSuffix(index: Int, content: String): Pair<Int, String>? {
         for (x in index until content.length) {
             checkMaximumAcceptableValue(x, content)?.apply {
-                return this
+                 return this
             }
         }
         return null
@@ -89,8 +89,7 @@ class StringAnalyzer(val manager: PlaceHolderManager) :
         startIndex: Int,
         content: String,
     ): Pair<Int, String>? {
-
-        for (x in startIndex + 1 until content.length) {
+        for (x in startIndex + 1..content.length) {
             if (isAcceptable(content.substring(startIndex, x))) {
                 if (x == startIndex)
                     return null

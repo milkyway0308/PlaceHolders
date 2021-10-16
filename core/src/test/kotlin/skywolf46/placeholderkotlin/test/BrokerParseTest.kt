@@ -22,6 +22,7 @@ class BrokerParseTest {
         parser.addBroker(SelfReplacingHolderBroker)
         storage["Coded"] = "Programmed"
         parser.manager.registerPrefixSuffix("<", ">")
+        println(parser.analyze(arrayOf(), storage, targetString).parse(storage))
         assertEquals(
             "Hello, <world>. Programmed to work and not to feel>",
             parser.analyze(arrayOf(), storage, targetString).parse(storage))

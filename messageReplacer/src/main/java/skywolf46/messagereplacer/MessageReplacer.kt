@@ -15,7 +15,8 @@ object MessageReplacer {
     private val messages = mutableMapOf<String, MessageStorage>()
     private val providers = mutableMapOf<KClass<*>, MethodWrapper>()
 
-    var DEFAULT_LANGUAGE = "${System.getProperty("user.language")}-${System.getProperty("user.country")}"
+//    var DEFAULT_LANGUAGE = "${System.getProperty("user.language")}-${System.getProperty("user.country")}"
+    var DEFAULT_LANGUAGE = "en_US"
 
     fun Class<Any>.storage(): MessageStorage? {
         return messages[name]

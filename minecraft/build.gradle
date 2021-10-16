@@ -13,17 +13,22 @@ repositories {
 }
 
 jar {
+    baseName "Placeholders-Minecraft"
+//    destinationDirectory = file("$rootDir/addonJars")
     finalizedBy("shadowJar")
 }
 
 shadowJar {
-    baseName = "Placeholders-Minecraft"
+    baseName "Placeholders-Minecraft"
+//    destinationDirectory = file("$rootDir/addonJars")
 }
 
 dependencies {
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compileOnly "org.spigotmc:spigot:1.12.2"
-    compileOnly "skywolf46:exutil:1.51.3"
+    api "skywolf46:exutil-common:1.63.2"
+    api "skywolf46:exutil-minecraft:1.63.2"
+    compileOnly "skywolf46:commandannotation-core:latest.release"
     implementation(project(":core"))
     implementation(project(":messageReplacer"))
 }

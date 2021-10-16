@@ -20,6 +20,6 @@ object MessageContainer {
     }
 
     fun getMessage(id: String): List<WrappedString> {
-        return messages[id] ?: ArrayList()
+        return messages[id] ?: emptyList()
     }
 }

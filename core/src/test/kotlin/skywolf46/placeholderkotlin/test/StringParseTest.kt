@@ -8,6 +8,9 @@ import skywolf46.placeholderkotlin.test.impl.TestParameterHolder
 import skywolf46.placeholderkotlin.test.impl.TestPlaceHolderFirst
 import skywolf46.placeholderkotlin.test.impl.TestPlaceHolderSecond
 import skywolf46.placeholderkotlin.test.impl.TestPlaceHolderThird
+import skywolf46.placeholderskotlin.PlaceHolders.DEFAULT_STORAGE
+import skywolf46.placeholderskotlin.PlaceHolders.compile
+import skywolf46.placeholderskotlin.PlaceHolders.compileWith
 
 class StringParseTest {
 
@@ -100,5 +103,19 @@ class StringParseTest {
         val (targetString, storage, parser) = TestTarget("$next is <oct:$next>.")
         parser.manager.registerPlaceholder("<", ">", "oct", TestParameterHolder::class.java)
         println(parser.analyze(arrayOf(), storage, targetString).parse(storage))
+    }
+
+    @Test
+    fun parameterizedPlaceHolderTest2() {
+        val next = 50
+        val (targetString, storage, parser) = TestTarget("$next is <oct:$next> <test> <test4>.")
+        parser.manager.registerPlaceholder("<", ">", "oct", TestParameterHolder::class.java)
+        DEFAULT_STORAGE.registerPlaceholder("<", ">", "oct", TestParameterHolder::class.java)
+        DEFAULT_STORAGE.registerPlaceholder("<", ">", "test", TestPlaceHolderFirst::class.java)
+        println(parser.analyze(arrayOf(), storage, targetString).parse(storage))
+        println(targetString.compile(ArgumentStorage()).parse(ArgumentStorage().apply {
+            setArgument("test4", "Test!")
+        }))
+        println(targetString.compileWith(parser, ArgumentStorage()).parse(ArgumentStorage()))
     }
 }

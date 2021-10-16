@@ -16,9 +16,10 @@ object SelfReplacingHolderBroker : AbstractPlaceHolderBroker() {
         derived: AbstractPlaceHolder,
     ): AbstractPlaceHolder? {
         if (derived is EmptyPlaceHolder) {
-            storage.get<Any>(derived.data.content)?.toString()?.apply {
-                return SelfReplacingPlaceHolder()
-            }
+//            storage.get<Any>(derived.data.content)?.toString()?.apply {
+//                println("...Replacing ${derived.data.content} with temp holder.")
+//            }
+            return SelfReplacingPlaceHolder()
         }
         return null
     }
